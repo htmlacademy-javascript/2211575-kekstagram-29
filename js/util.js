@@ -7,7 +7,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-function getRandomId (min, max) {
+function getRandom (min, max) {
   let id = min;
 
   return function() {
@@ -16,28 +16,10 @@ function getRandomId (min, max) {
     }
   };
 }
-function getRandomUrl (min, max) {
-  let url = min;
 
-  return function() {
-    if (url <= max) {
-      return url++;
-    }
-  };
-}
-function getRandomCommentId (min, max) {
-  let CommentId = min;
-
-  return function() {
-    if (CommentId <= max) {
-      return CommentId++;
-    }
-  };
-}
-
-const randomId = getRandomId(1, 25);
-const randomUrl = getRandomUrl(1, 25);
-const randomCommentId = getRandomCommentId(1, 10000000);
+const randomId = getRandom(1, 25);
+const randomUrl = getRandom(1, 25);
+const randomCommentId = getRandom(1, 10000000);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
