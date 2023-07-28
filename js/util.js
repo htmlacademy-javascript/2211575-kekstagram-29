@@ -11,6 +11,4 @@ const descriptionPhoto = () => ({
 
 const photo = Array.from({length:25}, descriptionPhoto);
 
-console.log(photo);
-
-export {descriptionPhoto};
+export {photo};

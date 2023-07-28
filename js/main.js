@@ -1,1 +1,3 @@
-import {descriptionPhoto} from './util.js';
+import {photo} from './util.js';
+
+console.log(photo);
