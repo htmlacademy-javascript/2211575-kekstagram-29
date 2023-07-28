@@ -1,21 +1,4 @@
-import {NAMES, COMMENTS} from './data.js';
-
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-function getRandom (min, max) {
-  let id = min;
-
-  return function() {
-    if (id <= max) {
-      return id++;
-    }
-  };
-}
+import {NAMES, COMMENTS, getRandomInteger, getRandom} from './data.js';
 
 const randomId = getRandom(1, 25);
 const randomUrl = getRandom(1, 25);

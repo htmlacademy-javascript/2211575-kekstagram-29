@@ -54,4 +54,21 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-export {DESCRIPTION, NAMES, COMMENTS};
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+function getRandom (min, max) {
+  let id = min;
+
+  return function() {
+    if (id <= max) {
+      return id++;
+    }
+  };
+}
+
+export {DESCRIPTION, NAMES, COMMENTS, getRandomInteger, getRandom};
