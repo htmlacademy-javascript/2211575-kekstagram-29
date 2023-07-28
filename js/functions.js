@@ -21,7 +21,8 @@ const onlyNumber = function (number) {
   return Number;
 };
 
-onlyNumber('56 корова');
+onlyNumber('57 корова');
+
 
 
 const veryScary = function (string,minLength,symbol) {
