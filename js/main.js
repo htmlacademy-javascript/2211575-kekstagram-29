@@ -1,1 +1,1 @@
-import {} from './util.js';
+import {descriptionPhoto} from './util.js';
