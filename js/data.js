@@ -71,9 +71,8 @@ function getRandom (min, max) {
   };
 }
 
-const randomId = getRandom(1, 25);
-const randomUrl = getRandom(1, 25);
 const randomCommentId = getRandom(1, 10000000);
+
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
@@ -105,4 +104,4 @@ function randomMessage () {
   }
 }
 
-export {DESCRIPTION, randomId, randomUrl, randomMessage, getRandomArrayElement, getRandomInteger};
+export {DESCRIPTION, randomMessage, getRandomArrayElement, getRandomInteger};
