@@ -24,7 +24,6 @@ const onlyNumber = function (number) {
 onlyNumber('57 корова');
 
 
-
 const veryScary = function (string,minLength,symbol) {
   const actualPad = minLength - string.length;
   if (actualPad <= 0) {
