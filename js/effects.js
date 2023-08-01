@@ -117,4 +117,3 @@ const resetEffects = () => {
 };
 
 export {resetEffects};
-
