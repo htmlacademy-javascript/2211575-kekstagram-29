@@ -1,107 +1,79 @@
-const DESCRIPTION = [
-  'Летняя фотография на фоне лесной тропинки',
-  'ночная съемка',
-  'ночной город',
-  'спящий кот',
-  'полезный завтрак',
-  'хорошее завершение недели',
-  'трудовые будни',
-  'с друзьями на вечеринке',
-  'утро начинается с чашечки кофе',
-  'Падение Стены Мария',
-  'завтрак в Starbucks'
+import {getRandomInteger} from './util.js';
+
+
+const PHOTO_COUNT = 25;
+
+const LIKES = {
+  MIN: 15,
+  MAX: 200
+};
+
+
+const description = ['Закат на берегу моря',
+  'Романтический ужин на балконе с видом на горы',
+  'Уютный вечер в семейном кругу',
+  'Улочки старого города',
+  'Красота в глазах смотрящего',
 ];
 
-const NAMES = [
-  'Данил',
-  'Екатерина',
-  'Николай',
-  'Илья',
-  'Ярослав',
-  'Владислав',
-  'Валерия',
-  'Александр',
-  'Дмитрий',
-  'Виктория',
-  'Василиса',
-  'Ксения',
-  'Анна',
-  'Павел',
-  'Тимофей',
-  'Артем',
-  'Егор',
-  'Семён',
-  'Кира',
-  'Максим',
-  'Анна',
-  'Мария',
-  'Нина',
-  'Константин',
-  'Сергей',
-  'Виктор',
-  'Роман',
-  'Елизавета',
-  'Андрей',
-  'Леви Аккерман'
-];
-
-const COMMENTS = [
+const nameList = ['Александр', 'Дарина', 'Илья', 'Марина', 'Андрей', 'Светлана', 'Константин', 'Вера'];
+const commentList = [
   'Всё отлично!',
-  'В целом всё неплохо. Но не всё',
+  'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  'Лица у людей на фотке перекошены, как будто их избивают. Лица у людей на фотке перекошены, как будто их избивают.',
+  'Упс!Вот это да!',
+  'Нормас.',
+  'Мы не знаем, что это такое. Если бы мы знали, что это такое, а так мы нем знаем, что это такое.',
+  'Никогда такого не было, и вот опять.',
+  'Супер!',
+  'Лайк подписка.',
+  'Шок-контент!',
+  'Как вы это делаете?',
+  'Вот как так-то?',
+  'Мне нра.',
+  'Жесть.',
+  'Aaaaaaaaaaa!!!',
+  'Отдыхали там в прошлом году.',
+  'Тема не раскрыта(',
+  '))))))))).'
+
 ];
 
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
+
+function generateComments() {
+  const comments = [];
+  for (let i = 0; i <= getRandomInteger(0, 30); i++) {
+    comments.push({
+      id: i,
+      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+      name: nameList[getRandomInteger(0, nameList.length - 1)],
+      message: commentList[getRandomInteger(0,commentList.length - 1)],
+    });
+  }
+  return comments;
+}
+
+
+const photos = [];
+
+const addPhoto = (id) => ({
+  id: id,
+  url: `photos/${id}.jpg`,
+  description: description[getRandomInteger(0, description.length - 1)],
+  likes: getRandomInteger(LIKES.MIN, LIKES.MAX),
+  comments: generateComments(),
+});
+
+
+const addPhotos = () => {
+  for (let i = 1; i <= PHOTO_COUNT; i ++) {
+    photos.push(addPhoto(i));
+  }
 };
 
-function getRandom (min, max) {
-  let id = min;
+addPhotos();
 
-  return function() {
-    if (id <= max) {
-      return id++;
-    }
-  };
-}
-
-const randomCommentId = getRandom(1, 10000000);
-
-
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
-function randomMessage () {
-  const quantity = getRandomInteger(1, 2);
-  const comment = [];
-  if (quantity === 1) {
-    comment[0] = {
-      id: randomCommentId(),
-      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomArrayElement(COMMENTS),
-      name: getRandomArrayElement(NAMES)
-    };
-    return comment;
-  }else {
-    comment[0] = {
-      id: randomCommentId(),
-      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomArrayElement(COMMENTS),
-      name: getRandomArrayElement(NAMES)
-    };
-    comment[1] = {
-      id: randomCommentId(),
-      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomArrayElement(COMMENTS),
-      name: getRandomArrayElement(NAMES)
-    };
-    return comment;
-  }
-}
-
-export {DESCRIPTION, randomMessage, getRandomArrayElement, getRandomInteger};
+export {generateComments, photos};

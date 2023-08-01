@@ -1,5 +1,4 @@
-import {photo} from './util.js';
-import { renderThubmnail} from './thubmnail.js';
+import {photos} from './data.js';
+import {renderPhotos} from './pictures.js';
 
-
-renderThubmnail(photo());
+renderPhotos(photos);
