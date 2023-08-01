@@ -1,36 +1,15 @@
-const stringLength = function (string, maxLenght) {
-  const length = (string.length);
-  if (length <= maxLenght) {
-    return true;
-  }
+// Первое задание
 
-  return false;
-};
-
-stringLength('привет', 6);
-
-const palindrome = function (string) {
-  const reverseString = string.split('').reverse().join('');
-  return string === reverseString;
-};
-
-palindrome('шалаш');
-
-const onlyNumber = function (number) {
-  const Number = (parseInt(number,10));
-  return Number;
-};
-
-onlyNumber('57 корова');
+function checkStringLength(string,maxLength) {
+  return string.length <= maxLength;
+}
+checkStringLength('Программа', 9);
+checkStringLength('Программа', 11);
 
 
-const veryScary = function (string,minLength,symbol) {
-  const actualPad = minLength - string.length;
-  if (actualPad <= 0) {
-    return string;
-  }
+const checkStrLength = (string,maxLength) => string.length <= maxLength;
 
-  return symbol.slice(0, actualPad % symbol.length) + symbol.repeat(actualPad / symbol.length) + string;
-};
+checkStrLength('Программа', 9);
+checkStrLength('Программа', 11);
 
-veryScary('q', 4 , 'we');
+
