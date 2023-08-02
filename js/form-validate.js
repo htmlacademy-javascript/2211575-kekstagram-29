@@ -1,3 +1,4 @@
+
 import { resetSlider } from './effects.js';
 import {normalizeString, isEscapeKey} from './util.js';
 import { resetScale } from './scale.js';
