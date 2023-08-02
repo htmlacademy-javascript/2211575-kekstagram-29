@@ -1,3 +1,4 @@
+
 const EFFECTS = {
   none: {
     name: 'none',
