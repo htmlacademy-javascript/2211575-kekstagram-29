@@ -25,5 +25,3 @@ uploadFile.addEventListener('change', () => {
     reader.readAsDataURL(file);
   }
 });
-
-export {uploadFile};
