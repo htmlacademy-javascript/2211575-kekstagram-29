@@ -86,7 +86,7 @@ let errorAlert = '';
 const showError = () => errorAlert;
 
 
-const onDescriptionInputElement = (evt) => {
+const onDescriptionInputValidity = (evt) => {
   const normalizedText = normalizeString(descriptionInputElement.value);
   if (normalizedText.length === MAX_DESCRIPTION_LENGTH) {
     const warningElement = document.createElement('p', 'warning__message', ErrorMessage.LIMIT_LENGTH);
@@ -151,7 +151,7 @@ const checkValidity = (inputValue) => {
 
 pristine.addValidator(hashtagInputElement, checkValidity, showError, 2, false);
 
-const onHashtagInputElement = () => {
+const onHashtagInputClick = () => {
   if (pristine.validate()) {
 
     submitBtnElement.disabled = false;
@@ -160,9 +160,9 @@ const onHashtagInputElement = () => {
   }
 };
 
-descriptionInputElement.addEventListener('input', onDescriptionInputElement);
+descriptionInputElement.addEventListener('input', onDescriptionInputValidity);
 commentsFieldElement.addEventListener('keydown', onCommentsFieldElementKeydown);
-hashtagInputElement.addEventListener('input', onHashtagInputElement);
+hashtagInputElement.addEventListener('input', onHashtagInputClick);
 
 
 export {onImageUploadFormElementChange, closeForm};
