@@ -6,17 +6,10 @@ const errorMessage = document.querySelector('#error').content.querySelector('.er
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 const formUploadMessage = document.querySelector('.img-upload__form');
 
-const closePopup = () => {
-  const popup = document.querySelector('.error') || document.querySelector('.success');
-  if (popup) {
-    popup.remove();
-  }
-};
 
 const onEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     closePopup();
-    document.removeEventListener('keydown', onEscKeydown);
   }
 };
 
@@ -25,9 +18,16 @@ const onPopupClick = (evt) => {
   if (popup && !evt.target.closest('.success__inner') && !evt.target.closest('.error__inner')) {
     evt.preventDefault();
     closePopup();
-    document.removeEventListener('keydown', onEscKeydown);
   }
 };
+
+function closePopup () {
+  const popup = document.querySelector('.error') || document.querySelector('.success');
+  if (popup) {
+    popup.remove();
+  }
+  document.removeEventListener('keydown', onEscKeydown);
+}
 
 
 const showMessage = (message) => {
@@ -45,8 +45,9 @@ const showErrorMessage = () => {
   errorButton.addEventListener('click', () => {
     document.querySelector('.img-upload__overlay').classList.remove('hidden');
     closePopup();
+    errorButton.removeEventListener('click', onEscKeydown);
   });
-  document.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown',{once: true}, (evt) => {
     if (isEscapeKey(evt)) {
       messageFragment.remove();
 
@@ -66,6 +67,7 @@ const showSuccessMessage = () => {
   successButton.addEventListener('click', () => {
     closeForm();
     closePopup();
+    successButton.removeEventListener('click', onEscKeydown);
   });
 };
 

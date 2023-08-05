@@ -52,18 +52,6 @@ const onImageUploadFormElementChange = () => {
 imageUploadFormElement.addEventListener('change',onImageUploadFormElementChange);
 
 
-const closeForm = () => {
-  formOverlayElement.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  resetSlider();
-  formElement.reset();
-  pristine.reset();
-  resetScale();
-  submitBtnElement.disabled = false;
-  uploadCancelButtonElement.removeEventListener('click', onCloseButtonElementClick);
-  document.removeEventListener('keydown', onDocumentKeydown);
-};
-
 const onCommentsFieldElementKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     evt.stopPropagation();
@@ -79,14 +67,27 @@ function onDocumentKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeForm();
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
+}
+
+function closeForm () {
+  formOverlayElement.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  resetSlider();
+  formElement.reset();
+  pristine.reset();
+  resetScale();
+  submitBtnElement.disabled = false;
+  uploadCancelButtonElement.removeEventListener('click', onCloseButtonElementClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 let errorAlert = '';
 const showError = () => errorAlert;
 
 
-const onDescriptionInputElement = (evt) => {
+const onDescriptionInputValidity = (evt) => {
   const normalizedText = normalizeString(descriptionInputElement.value);
   if (normalizedText.length === MAX_DESCRIPTION_LENGTH) {
     const warningElement = document.createElement('p', 'warning__message', ErrorMessage.LIMIT_LENGTH);
@@ -96,7 +97,7 @@ const onDescriptionInputElement = (evt) => {
 };
 
 
-const hashtagValidator = (inputValue) => {
+const checkValidity = (inputValue) => {
   errorAlert = '';
   const inputText = normalizeString(inputValue);
 
@@ -149,9 +150,9 @@ const hashtagValidator = (inputValue) => {
 };
 
 
-pristine.addValidator(hashtagInputElement, hashtagValidator, showError, 2, false);
+pristine.addValidator(hashtagInputElement, checkValidity, showError, 2, false);
 
-const onHashtagInputElement = () => {
+const onHashtagInputClick = () => {
   if (pristine.validate()) {
 
     submitBtnElement.disabled = false;
@@ -160,9 +161,9 @@ const onHashtagInputElement = () => {
   }
 };
 
-descriptionInputElement.addEventListener('input', onDescriptionInputElement);
+descriptionInputElement.addEventListener('input', onDescriptionInputValidity);
 commentsFieldElement.addEventListener('keydown', onCommentsFieldElementKeydown);
-hashtagInputElement.addEventListener('input', onHashtagInputElement);
+hashtagInputElement.addEventListener('input', onHashtagInputClick);
 
 
 export {onImageUploadFormElementChange, closeForm};

@@ -54,31 +54,31 @@ const onLoadCommentsPhotoClick = () => {
 };
 
 
-const closeBigPhoto = () => {
+const onBigPhotoCloseButtonPhotoClick = () => {
+  loadCommentsPhoto.removeEventListener('click', onLoadCommentsPhotoClick);
+  closeBigPhoto();
+};
+
+
+const onBigPhotoEscKeyDown = (evt) => {
+  if (isEscapeKey(evt) &&
+      !evt.target.classList.contains('social__footer-text')
+  ){
+    loadCommentsPhoto.removeEventListener('click', onLoadCommentsPhotoClick);
+    bigPhotoCloseButtonPhoto.removeEventListener('click', onBigPhotoCloseButtonPhotoClick);
+    closeBigPhoto();
+  }
+};
+
+function closeBigPhoto () {
   bigPhoto.classList.add('hidden');
   document.body.classList.remove('modal-open');
   commentsCount = COMMENTS_STEP;
   currentComments = [];
   socialFooterTextPhoto.value = '';
-
-};
-
-
-const onBigPhotoCloseButtonPhotoClick = () => {
-  loadCommentsPhoto.removeEventListener('click', onLoadCommentsPhotoClick);
   bigPhotoCloseButtonPhoto.removeEventListener('click', onBigPhotoCloseButtonPhotoClick);
-  closeBigPhoto();
-};
-
-const onBigPhotoEscKeyDown = (evt) => {
-  if (isEscapeKey(evt) &&
-      !evt.target.classList.contains('social__footer-text')
-  ) {
-    document.removeEventListener('keydown', onBigPhotoEscKeyDown);
-    loadCommentsPhoto.removeEventListener('click', onLoadCommentsPhotoClick);
-    closeBigPhoto();
-  }
-};
+  document.removeEventListener('keydown', onBigPhotoEscKeyDown);
+}
 
 const showBigPhoto = (photo) => {
   const {url, likes, comments, description} = photo;
@@ -93,8 +93,9 @@ const showBigPhoto = (photo) => {
 
 
   loadCommentsPhoto.addEventListener('click', onLoadCommentsPhotoClick);
-  document.addEventListener('keydown',onBigPhotoEscKeyDown);
-  bigPhotoCloseButtonPhoto.addEventListener('click', onBigPhotoCloseButtonPhotoClick);
+  document.addEventListener('keydown',onBigPhotoEscKeyDown, {once: true});
+  bigPhotoCloseButtonPhoto.addEventListener('click', onBigPhotoCloseButtonPhotoClick, {once: true});
+
 
   renderComments();
 };
