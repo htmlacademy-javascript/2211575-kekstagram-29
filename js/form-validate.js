@@ -52,18 +52,6 @@ const onImageUploadFormElementChange = () => {
 imageUploadFormElement.addEventListener('change',onImageUploadFormElementChange);
 
 
-const closeForm = () => {
-  formOverlayElement.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  resetSlider();
-  formElement.reset();
-  pristine.reset();
-  resetScale();
-  submitBtnElement.disabled = false;
-  uploadCancelButtonElement.removeEventListener('click', onCloseButtonElementClick);
-  document.removeEventListener('keydown', onDocumentKeydown);
-};
-
 const onCommentsFieldElementKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     evt.stopPropagation();
@@ -79,7 +67,20 @@ function onDocumentKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeForm();
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
+}
+
+function closeForm () {
+  formOverlayElement.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  resetSlider();
+  formElement.reset();
+  pristine.reset();
+  resetScale();
+  submitBtnElement.disabled = false;
+  uploadCancelButtonElement.removeEventListener('click', onCloseButtonElementClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 let errorAlert = '';
