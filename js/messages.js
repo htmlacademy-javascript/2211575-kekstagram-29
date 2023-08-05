@@ -45,6 +45,7 @@ const showErrorMessage = () => {
   errorButton.addEventListener('click', () => {
     document.querySelector('.img-upload__overlay').classList.remove('hidden');
     closePopup();
+    errorButton.removeEventListener('click', onEscKeydown);
   });
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
@@ -66,6 +67,7 @@ const showSuccessMessage = () => {
   successButton.addEventListener('click', () => {
     closeForm();
     closePopup();
+    successButton.removeEventListener('click', onEscKeydown);
   });
 };
 

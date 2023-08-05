@@ -96,7 +96,7 @@ const onDescriptionInputElement = (evt) => {
 };
 
 
-const hashtagValidator = (inputValue) => {
+const checkValidity = (inputValue) => {
   errorAlert = '';
   const inputText = normalizeString(inputValue);
 
@@ -149,7 +149,7 @@ const hashtagValidator = (inputValue) => {
 };
 
 
-pristine.addValidator(hashtagInputElement, hashtagValidator, showError, 2, false);
+pristine.addValidator(hashtagInputElement, checkValidity, showError, 2, false);
 
 const onHashtagInputElement = () => {
   if (pristine.validate()) {

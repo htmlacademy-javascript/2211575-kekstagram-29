@@ -75,6 +75,7 @@ const onBigPhotoEscKeyDown = (evt) => {
       !evt.target.classList.contains('social__footer-text')
   ) {
     document.removeEventListener('keydown', onBigPhotoEscKeyDown);
+    bigPhotoCloseButtonPhoto.removeEventListener('click', onBigPhotoEscKeyDown);
     loadCommentsPhoto.removeEventListener('click', onLoadCommentsPhotoClick);
     closeBigPhoto();
   }
