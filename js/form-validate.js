@@ -83,8 +83,8 @@ function closeForm () {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-let errorAlert = '';
-const showError = () => errorAlert;
+let showErrorAlert = '';
+const showError = () => showErrorAlert;
 
 
 const onDescriptionInputValidity = (evt) => {
@@ -98,7 +98,7 @@ const onDescriptionInputValidity = (evt) => {
 
 
 const checkValidity = (inputValue) => {
-  errorAlert = '';
+  showErrorAlert = '';
   const inputText = normalizeString(inputValue);
 
   if (!inputText) {
@@ -143,7 +143,7 @@ const checkValidity = (inputValue) => {
   return rules.every((rule) => {
     const isInvalide = rule.check;
     if(isInvalide){
-      errorAlert = rule.error;
+      showErrorAlert = rule.error;
     }
     return !isInvalide;
   });

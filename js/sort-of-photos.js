@@ -33,17 +33,17 @@ const selectedFilters = {
   'filter-discussed': () => photos.slice().sort((firstElement, secondElement) => secondElement.comments.length - firstElement.comments.length),
 };
 
-const isButton = (evt) => evt.target.tagName === 'BUTTON';
+const clickButton = (evt) => evt.target.tagName === 'BUTTON';
 
 const onFiltersFormContainerClick = debounce((evt) => {
-  if (isButton(evt)){
+  if (clickButton(evt)){
     removePhotos();
   }
   renderPhotos(selectedFilters[evt.target.id]());
 });
 
 const onButtonClick = (evt) => {
-  if (isButton(evt)){
+  if (clickButton(evt)){
     const selectedButton = filtersFormContainer.querySelector(`.${BTN_ACTIVE_CLASS}`);
 
     if (selectedButton){

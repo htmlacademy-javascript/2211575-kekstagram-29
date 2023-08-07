@@ -76,7 +76,7 @@ const onSuccess = ()=> {
   showSuccessMessage();
 };
 
-const errorAlert = () => {
+const showErrorAlert = () => {
   showErrorMessage();
 };
 
@@ -90,7 +90,7 @@ const onFormUploadMessageSubmit = (evt) => {
     onSuccess();
     submitButton.disabled = false;
   }, () => {
-    errorAlert();
+    showErrorAlert();
     submitButton.disabled = false;
   },'POST', new FormData(evt.target));
 };
